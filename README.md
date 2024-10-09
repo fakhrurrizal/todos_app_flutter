@@ -6,7 +6,7 @@ Todo List App
 <p>Nama  : Muhammad Fakhrur Rizal</p>
 <p>Kelas  : KJ301</p>
 <p>Kode  : CIE511</p>
-<p>Kode  : 	Pemrograman Mobile</p>
+<p>Mata Kuliah  : 	Pemrograman Mobile</p>
 
 ## Gambar
 
