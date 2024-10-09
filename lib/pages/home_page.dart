@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'dart:convert';
 import 'package:todos_app_flutter/core/assets/assets.dart';
 import 'package:todos_app_flutter/entities/category.dart';
 import 'package:todos_app_flutter/entities/todo.dart';
+import 'package:todos_app_flutter/widgets/custom_checkbox.dart';
 import 'package:todos_app_flutter/widgets/home_page/confirm_delete.dart';
 import 'package:todos_app_flutter/widgets/home_page/edit_todo_dialog.dart';
+import 'package:todos_app_flutter/widgets/home_page/filter_dialog.dart';
 import 'package:todos_app_flutter/widgets/snackbar_custom.dart';
-import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../widgets/home_page/add_todo_dialog.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,24 +23,55 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Todo> _todos = [];
   final List<TodoCategory> _categories = [
-    TodoCategory(id: 1, name: 'Work', color: Colors.blue),
-    TodoCategory(id: 2, name: 'Personal', color: Colors.green),
-    TodoCategory(id: 3, name: 'Shopping', color: Colors.orange),
-    TodoCategory(id: 4, name: 'Others', color: Colors.purple),
+    TodoCategory(id: 1, name: 'Pekerjaan', color: Colors.blue),
+    TodoCategory(id: 2, name: 'Pribadi', color: Colors.green),
+    TodoCategory(id: 3, name: 'Belanja', color: Colors.orange),
+    TodoCategory(id: 4, name: 'Lainya', color: Colors.purple),
   ];
+
+  int? _selectedCategoryId;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTodos();
+  }
+
+  Future<void> _loadTodos() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? todosString = prefs.getString('todos');
+
+    if (todosString != null) {
+      final List<dynamic> todosJson = jsonDecode(todosString);
+      setState(() {
+        _todos.addAll(todosJson.map((json) => Todo.fromJson(json)).toList());
+      });
+    }
+  }
+
+  Future<void> _saveTodos() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> todosJson =
+        _todos.map((todo) => jsonEncode(todo.toJson())).toList();
+    await prefs.setString('todos', jsonEncode(todosJson));
+  }
 
   void _addTodo(Todo todo) {
     setState(() {
       _todos.add(todo);
     });
+    _saveTodos();
   }
 
   void _toggleTodoCompletion(int index) {
     setState(() {
       _todos[index] = _todos[index].copyWith(
         isCompleted: !_todos[index].isCompleted,
+        updatedAt: DateTime.now(),
       );
     });
+
+    _saveTodos();
   }
 
   void _showAddTodoDialog() {
@@ -50,24 +86,54 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return FilterDialog(
+          selectedCategoryId: _selectedCategoryId,
+          onCategorySelected: (int? selectedCategory) {
+            setState(() {
+              _selectedCategoryId = selectedCategory;
+            });
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
+  }
+
   Future<void> _showEditTodoDialog(BuildContext context, Todo todo, int index) {
     return showDialog<void>(
       context: context,
       builder: (context) {
         return EditTodoDialog(
           todo: todo,
-          onSave: (String title, String description, DateTime updatedAt) {
+          categories: _categories,
+          onSave: (String title, String description, DateTime updatedAt,
+              int categoryId) {
             setState(() {
               _todos[index] = todo.copyWith(
                 title: title,
                 description: description,
                 updatedAt: updatedAt,
+                categoryId: categoryId,
               );
             });
           },
         );
       },
     );
+  }
+
+  List<Todo> _filterTodos() {
+    if (_selectedCategoryId == null) {
+      return _todos;
+    } else {
+      return _todos
+          .where((todo) => todo.categoryId == _selectedCategoryId)
+          .toList();
+    }
   }
 
   @override
@@ -82,11 +148,11 @@ class _HomePageState extends State<HomePage> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.filter_list),
-                  onPressed: () {},
+                  onPressed: _showFilterDialog,
                 ),
                 IconButton(
-                  icon: const Icon(Icons.add), // Add button
-                  onPressed: _showAddTodoDialog, // Show modal dialog
+                  icon: const Icon(Icons.add),
+                  onPressed: _showAddTodoDialog,
                 ),
               ],
             ),
@@ -101,7 +167,7 @@ class _HomePageState extends State<HomePage> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: _todos.isEmpty
+        child: _filterTodos().isEmpty
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -120,11 +186,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               )
             : ListView.builder(
-                itemCount: _todos.length,
+                itemCount: _filterTodos().length,
                 itemBuilder: (context, index) {
-                  final todo = _todos[index];
+                  final todo = _filterTodos()[index];
 
-                  // Get the category color or fallback to a default color if not found
                   final categoryColor = _categories
                       .firstWhere(
                         (cat) => cat.id == todo.categoryId,
@@ -133,12 +198,8 @@ class _HomePageState extends State<HomePage> {
                       )
                       .color;
 
-                  final displayDate = todo.updatedAt != todo.createdAt
-                      ? todo.updatedAt
-                      : todo.createdAt;
-
                   return Dismissible(
-                    key: Key(todo.id.toString()), // Unique key for each item
+                    key: Key(todo.id.toString()),
                     secondaryBackground: Container(
                       color: Colors.red,
                       child: const Align(
@@ -164,6 +225,7 @@ class _HomePageState extends State<HomePage> {
                         return await showConfirmationDialog(context);
                       } else if (direction == DismissDirection.startToEnd) {
                         _showEditTodoDialog(context, todo, index);
+
                         return false;
                       }
                       return false;
@@ -199,6 +261,7 @@ class _HomePageState extends State<HomePage> {
                                 ? TextDecoration.lineThrough
                                 : null,
                             color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         subtitle: Column(
@@ -218,9 +281,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        trailing: Checkbox(
+                        trailing: CustomCheckbox(
                           value: todo.isCompleted,
-                          checkColor: Colors.white,
                           onChanged: (value) {
                             _toggleTodoCompletion(index);
                           },

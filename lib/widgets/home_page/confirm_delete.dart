@@ -10,16 +10,16 @@ Future<bool> showConfirmationDialog(BuildContext context) async {
             content: const Text('Apakah Anda yakin ingin menghapus rencana ini?'),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(false), // Cancel
+                onPressed: () => Navigator.of(context).pop(false),
                 child: const Text('Batal'),
               ),
               TextButton(
-                onPressed: () => Navigator.of(context).pop(true), // Confirm
+                onPressed: () => Navigator.of(context).pop(true),
                 child: const Text('Hapus'),
               ),
             ],
           );
         },
       ) ??
-      false; // Default to false if dialog is dismissed
+      false; 
 }

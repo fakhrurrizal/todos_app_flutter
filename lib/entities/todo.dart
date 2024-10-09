@@ -1,10 +1,12 @@
+
+
 class Todo {
   final int id;
   final String title;
   final String description;
   final bool isCompleted;
   final int categoryId;
-  final DateTime createdAt; // New property for creation date
+  final DateTime createdAt;
   DateTime? updatedAt;
 
   Todo({
@@ -13,53 +15,49 @@ class Todo {
     required this.description,
     required this.isCompleted,
     required this.categoryId,
-    required this.createdAt,
-    this.updatedAt,
-  });
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  })  : createdAt = createdAt ?? DateTime.now(),
+        updatedAt = updatedAt;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'description': description,
+        'isCompleted': isCompleted,
+        'categoryId': categoryId,
+        'createdAt': createdAt.toIso8601String(),
+        'updatedAt': updatedAt?.toIso8601String(),
+      };
+
+  static Todo fromJson(Map<String, dynamic> json) {
+    return Todo(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      isCompleted: json['isCompleted'],
+      categoryId: json['categoryId'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+    );
+  }
 
   Todo copyWith({
-    int? id,
     String? title,
     String? description,
     bool? isCompleted,
     int? categoryId,
-    DateTime? createdAt,
     DateTime? updatedAt,
   }) {
     return Todo(
-      id: id ?? this.id,
+      id: id,
       title: title ?? this.title,
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,
       categoryId: categoryId ?? this.categoryId,
-      createdAt: createdAt ?? this.createdAt,
+      createdAt: createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'isCompleted': isCompleted ? 1 : 0,
-      'categoryId': categoryId,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt':
-          updatedAt?.toIso8601String() ?? '', // Convert to string for storage
-    };
-  }
-
-  factory Todo.fromMap(Map<String, dynamic> map) {
-    return Todo(
-      id: map['id'],
-      title: map['title'],
-      description: map['description'],
-      isCompleted: map['isCompleted'] == 1,
-      categoryId: map['categoryId'],
-      createdAt: DateTime.parse(map['createdAt']), // Parse string to DateTime
-      updatedAt:
-          map['updatedAt'] != '' ? DateTime.parse(map['updatedAt']) : null,
     );
   }
 }

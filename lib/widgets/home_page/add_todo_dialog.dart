@@ -51,19 +51,29 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
             controller: _controllerDescription,
             decoration: const InputDecoration(labelText: 'Keterangan'),
           ),
-          DropdownButton<int>(
-            value: _selectedCategoryId,
-            onChanged: (int? newValue) {
-              setState(() {
-                _selectedCategoryId = newValue!;
-              });
-            },
-            items: widget.categories.map((TodoCategory category) {
-              return DropdownMenuItem<int>(
-                value: category.id,
-                child: Text(category.name),
-              );
-            }).toList(),
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.grey, width: 1.0),
+              ),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<int>(
+                isExpanded: true,
+                value: _selectedCategoryId,
+                onChanged: (int? newValue) {
+                  setState(() {
+                    _selectedCategoryId = newValue!;
+                  });
+                },
+                items: widget.categories.map((TodoCategory category) {
+                  return DropdownMenuItem<int>(
+                    value: category.id,
+                    child: Text(category.name),
+                  );
+                }).toList(),
+              ),
+            ),
           ),
         ],
       ),

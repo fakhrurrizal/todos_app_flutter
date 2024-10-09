@@ -16,7 +16,11 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final _widgets = [
     const HomePage(),
-    const Center(child: Text('This is profile page')),
+    const Center(
+        child: Text(
+      'Nama : Muhammad Fakhrur Rizal\nNim : 20230801286',
+      textAlign: TextAlign.center,
+    )),
   ];
 
   @override

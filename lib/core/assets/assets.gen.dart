@@ -50,19 +50,16 @@ class $AssetsIconsNavGen {
   const $AssetsIconsNavGen();
 
   /// File path: assets/icons/nav/history.svg
-  SvgGenImage get history => const SvgGenImage('assets/icons/nav/history.svg');
-
   /// File path: assets/icons/nav/home.svg
   SvgGenImage get home => const SvgGenImage('assets/icons/nav/home.svg');
 
   /// File path: assets/icons/nav/profile.svg
   SvgGenImage get profile => const SvgGenImage('assets/icons/nav/profile.svg');
 
-  /// File path: assets/icons/nav/setting.svg
-  SvgGenImage get setting => const SvgGenImage('assets/icons/nav/setting.svg');
-
-  /// List of all assets
-  List<SvgGenImage> get values => [history, home, profile, setting];
+  List<SvgGenImage> get values => [
+        home,
+        profile,
+      ];
 }
 
 class Assets {

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         // textTheme: GoogleFonts.kumbhSansTextTheme(
         //   Theme.of(context).textTheme,
         // ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           centerTitle: true,
           color: AppColors.white,
           elevation: 0,
