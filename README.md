@@ -4,6 +4,12 @@ Todo List App
 
 ## Gambar
 
+<p>NIM  : 20230801286</p>
+<p>Nama  : Muhammad Fakhrur Rizal</p>
+<p>Kelas  : KJ301</p>
+<p>Kode  : CIE511</p>
+<p>Kode  : 	Pemrograman Mobile</p>
+
 <img src="./assets/mentahan/1.jpg" alt="Tampilan Proyek" width="250"/>
 </br>
 <img src="./assets/mentahan/2.jpg" alt="Tampilan Proyek" width="250"/>
