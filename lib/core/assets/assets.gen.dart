@@ -14,76 +14,24 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/attendance.svg
-  SvgGenImage get attendance =>
-      const SvgGenImage('assets/icons/attendance.svg');
-
-  /// File path: assets/icons/back.svg
-  SvgGenImage get back => const SvgGenImage('assets/icons/back.svg');
-
-  /// File path: assets/icons/email.svg
-  SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
-
   $AssetsIconsMenuGen get menu => const $AssetsIconsMenuGen();
   $AssetsIconsNavGen get nav => const $AssetsIconsNavGen();
-
-  /// File path: assets/icons/notification_rounded.svg
-  SvgGenImage get notificationRounded =>
-      const SvgGenImage('assets/icons/notification_rounded.svg');
-
-  /// File path: assets/icons/password.svg
-  SvgGenImage get password => const SvgGenImage('assets/icons/password.svg');
-
-  /// File path: assets/icons/reverse.svg
-  SvgGenImage get reverse => const SvgGenImage('assets/icons/reverse.svg');
-
-  /// List of all assets
-  List<SvgGenImage> get values =>
-      [attendance, back, email, notificationRounded, password, reverse];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/bg_home.png
-  AssetGenImage get bgHome => const AssetGenImage('assets/images/bg_home.png');
-
-  /// File path: assets/images/failed.png
-  AssetGenImage get failed => const AssetGenImage('assets/images/failed.png');
-
-  /// File path: assets/images/img_my_location.png
-  AssetGenImage get imgMyLocation =>
-      const AssetGenImage('assets/images/img_my_location.png');
-
-  /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
-
-  /// File path: assets/images/logo_code_with_bahri.png
-  AssetGenImage get logoCodeWithBahri =>
-      const AssetGenImage('assets/images/logo_code_with_bahri.png');
-
-  /// File path: assets/images/logo_white.png
-  AssetGenImage get logoWhite =>
-      const AssetGenImage('assets/images/logo_white.png');
-
-  /// File path: assets/images/see_location.png
-  AssetGenImage get seeLocation =>
-      const AssetGenImage('assets/images/see_location.png');
 
   /// File path: assets/images/success.png
   AssetGenImage get success => const AssetGenImage('assets/images/success.png');
 
+  AssetGenImage get empty => const AssetGenImage('assets/images/empty.png');
+
+  AssetGenImage get no_data => const AssetGenImage('assets/images/no_data.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [
-        bgHome,
-        failed,
-        imgMyLocation,
-        logo,
-        logoCodeWithBahri,
-        logoWhite,
-        seeLocation,
-        success
-      ];
+  List<AssetGenImage> get values => [logo, success, empty, no_data];
 }
 
 class $AssetsIconsMenuGen {
@@ -92,24 +40,10 @@ class $AssetsIconsMenuGen {
   /// File path: assets/icons/menu/catatan.svg
   SvgGenImage get catatan => const SvgGenImage('assets/icons/menu/catatan.svg');
 
-  /// File path: assets/icons/menu/datang.svg
-  SvgGenImage get datang => const SvgGenImage('assets/icons/menu/datang.svg');
-
-  /// File path: assets/icons/menu/izin.svg
-  SvgGenImage get izin => const SvgGenImage('assets/icons/menu/izin.svg');
-
-  /// File path: assets/icons/menu/jadwal.svg
-  SvgGenImage get jadwal => const SvgGenImage('assets/icons/menu/jadwal.svg');
-
-  /// File path: assets/icons/menu/lembur.svg
-  SvgGenImage get lembur => const SvgGenImage('assets/icons/menu/lembur.svg');
-
-  /// File path: assets/icons/menu/pulang.svg
-  SvgGenImage get pulang => const SvgGenImage('assets/icons/menu/pulang.svg');
-
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [catatan, datang, izin, jadwal, lembur, pulang];
+  List<SvgGenImage> get values => [
+        catatan,
+      ];
 }
 
 class $AssetsIconsNavGen {

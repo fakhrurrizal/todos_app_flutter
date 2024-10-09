@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos_app_flutter/core/assets/assets.dart';
 import 'package:todos_app_flutter/core/constants/colors.dart';
-import 'package:todos_app_flutter/presentation/home/pages/home_page.dart';
+import 'package:todos_app_flutter/pages/home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,8 +16,6 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final _widgets = [
     const HomePage(),
-    const Center(child: Text('This is history page')),
-    const Center(child: Text('This is setting page')),
     const Center(child: Text('This is profile page')),
   ];
 
@@ -28,11 +26,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: _widgets,
       ),
-      appBar: AppBar(
-        title: const Text("Dashboard"),
-        actions: const [],
-      ),
-            bottomNavigationBar: Container(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.only(bottom: 10.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
@@ -70,27 +64,9 @@ class _MainPageState extends State<MainPage> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Assets.icons.nav.history.svg(
-                  colorFilter: ColorFilter.mode(
-                    _selectedIndex == 1 ? AppColors.primary : AppColors.grey,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                label: 'History',
-              ),
-              BottomNavigationBarItem(
-                icon: Assets.icons.nav.setting.svg(
-                  colorFilter: ColorFilter.mode(
-                    _selectedIndex == 2 ? AppColors.primary : AppColors.grey,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                label: 'Setting',
-              ),
-              BottomNavigationBarItem(
                 icon: Assets.icons.nav.profile.svg(
                   colorFilter: ColorFilter.mode(
-                    _selectedIndex == 3 ? AppColors.primary : AppColors.grey,
+                    _selectedIndex == 1 ? AppColors.primary : AppColors.grey,
                     BlendMode.srcIn,
                   ),
                 ),
