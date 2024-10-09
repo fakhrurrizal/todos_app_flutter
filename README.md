@@ -4,9 +4,15 @@ Todo List App
 
 ## Gambar
 
-![Tampilan Splash Screen](./assets/mentahan/1.jpg)
-![Tampilan Proyek](./assets/mentahan/2.jpg)
-![Tampilan Proyek](./assets/mentahan/3.jpg)
-![Tampilan Proyek](./assets/mentahan/4.jpg)
-![Tampilan Proyek](./assets/mentahan/5.jpg)
-![Tampilan Proyek](./assets/mentahan/6.jpg)
+<img src="./assets/mentahan/1.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
+<img src="./assets/mentahan/2.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
+<img src="./assets/mentahan/3.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
+<img src="./assets/mentahan/4.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
+<img src="./assets/mentahan/5.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
+<img src="./assets/mentahan/6.jpg" alt="Tampilan Proyek" width="300"/>
+</br>
