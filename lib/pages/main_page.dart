@@ -1,9 +1,9 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:todos_app_flutter/core/assets/assets.dart';
-import 'package:todos_app_flutter/core/constants/colors.dart';
-import 'package:todos_app_flutter/pages/home_page.dart';
+import 'package:tugas_1/core/assets/assets.dart';
+import 'package:tugas_1/core/constants/colors.dart';
+import 'package:tugas_1/pages/home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

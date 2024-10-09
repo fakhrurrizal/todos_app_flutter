@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todos_app_flutter/core/constants/colors.dart';
-import 'package:todos_app_flutter/pages/splash_page.dart';
+import 'package:tugas_1/core/constants/colors.dart';
+import 'package:tugas_1/pages/splash_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

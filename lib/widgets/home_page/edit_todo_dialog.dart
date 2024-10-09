@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todos_app_flutter/entities/category.dart';
-import 'package:todos_app_flutter/entities/todo.dart';
+import 'package:tugas_1/entities/category.dart';
+import 'package:tugas_1/entities/todo.dart';
 
 class EditTodoDialog extends StatefulWidget {
   final Todo todo;
